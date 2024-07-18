@@ -6,8 +6,9 @@ import Hanger from "./Hanger";
 import { handleSignOut } from "../_auth/auth";
 import { useQuery } from "@tanstack/react-query";
 import { getBalance } from "../_api/api";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useToast } from "../_context/ToastContext";
+import useNotifyReward from "../_hooks/useNotifyReward";
 
 type MainNavProps = {
   username: string;
@@ -20,17 +21,12 @@ const MainNav = ({ username }: MainNavProps) => {
   const { data } = useQuery({
     queryKey: ["balance", username],
     queryFn: ({ queryKey }) => getBalance(queryKey[1]),
-
     refetchInterval: 5000,
   });
 
-  const hasAccess = useMemo(() => data?.hasAccess ?? false, [data]);
+  const hasAccess = useMemo(() => data?.hasAccess, [data]);
 
-  useEffect(() => {
-    if (hasAccess) {
-      triggerToast("You have been rewarded Hanna Coin!", "info");
-    }
-  }, [hasAccess]);
+  useNotifyReward(hasAccess, triggerToast);
 
   return (
     <div className="navbar bg-base-100 fixed z-10 shadow-xl">

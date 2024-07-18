@@ -1,6 +1,7 @@
 import {
   ReactNode,
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -27,26 +28,30 @@ type ToastType = {
 };
 
 export function ToastProvider({ children }: ToastProviderProps) {
-  const [open, setOpen] = useState(false);
   const [toastMsgs, setToastMsgs] = useState<ToastType[]>([]);
 
-  const triggerToast = (msg: string, type: ToastType["type"] = "success") => {
-    setOpen(true);
-    setToastMsgs((msgs) => [...msgs, { msg, type }]);
-  };
+  const triggerToast = useCallback(
+    (msg: string, type: ToastType["type"] = "success") => {
+      setToastMsgs((msgs) => [...msgs, { msg, type }]);
+    },
+    []
+  );
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setOpen(false);
-      setToastMsgs((msgs): ToastType[] => msgs.toSpliced(0, 1));
-    }, 4000);
+    const newestToast = toastMsgs[toastMsgs.length - 1];
+    const timeout = setTimeout(
+      () => {
+        setToastMsgs((msgs): ToastType[] => msgs.toSpliced(0, 1));
+      },
+      newestToast?.type === "info" ? 10000 : 3000
+    );
 
     return () => {
       if (timeout) {
         clearTimeout(timeout);
       }
     };
-  }, [open, toastMsgs]);
+  }, [toastMsgs]);
 
   return (
     <ToastContext.Provider
