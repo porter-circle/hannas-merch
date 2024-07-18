@@ -42,11 +42,10 @@ const Modal = ({
                 Okay
               </button>
             )}
-
-            <button className="btn btn-nuetral" onClick={() => setOpen(false)}>
-              Cancel
-            </button>
           </form>
+          <button className="btn btn-nuetral" onClick={() => setOpen(false)}>
+            Cancel
+          </button>
         </div>
       </div>
     </dialog>

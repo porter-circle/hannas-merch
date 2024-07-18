@@ -34,16 +34,24 @@ const SHOP_ITEMS: ShopItemType[] = [
     gated: false,
   },
   {
-    name: "Daft Punk Vinyl",
+    name: "Fresh Carrots",
     id: "5",
     imgUrl:
-      "https://retrospekt.com/cdn/shop/files/DaftPunk_RandomAccessMemories_2copy.jpg?v=1700576267&width=3331",
+      "https://harvesttotable.com/wp-content/uploads/2016/08/bigstock-Fresh-Dug-Carrots-5970768-1024x683.jpg",
+    price: 100,
+    gated: true,
+  },
+  {
+    name: "Death Metal Vinyl",
+    id: "6",
+    imgUrl:
+      "https://napalmrecords.com/media/catalog/product/cache/2c98b5dedb058b51317c19b0b945bfc5/6/7/67004_sentenced_death_metal_orchestra_from_finland_black_2_lp_vinyl_napalm_records.jpg",
     price: 40,
     gated: true,
   },
   {
     name: "Hello Kitty Slippers",
-    id: "6",
+    id: "7",
     imgUrl: "https://m.media-amazon.com/images/I/81c4OQVhw1L._AC_SX395_.jpg",
     price: 300,
     gated: true,

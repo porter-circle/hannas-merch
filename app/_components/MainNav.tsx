@@ -4,6 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Hanger from "./Hanger";
 import { handleSignOut } from "../_auth/auth";
+import { useQuery } from "@tanstack/react-query";
+import { getBalance } from "../_api/api";
+import { useEffect, useMemo } from "react";
+import { useToast } from "../_context/ToastContext";
 
 type MainNavProps = {
   username: string;
@@ -11,6 +15,23 @@ type MainNavProps = {
 
 const MainNav = ({ username }: MainNavProps) => {
   const pathname = usePathname();
+  const { triggerToast } = useToast();
+
+  const { data } = useQuery({
+    queryKey: ["balance", username],
+    queryFn: ({ queryKey }) => getBalance(queryKey[1]),
+
+    refetchInterval: 5000,
+  });
+
+  const hasAccess = useMemo(() => data?.hasAccess ?? false, [data]);
+
+  useEffect(() => {
+    if (hasAccess) {
+      triggerToast("You have been rewarded Hanna Coin!", "info");
+    }
+  }, [hasAccess]);
+
   return (
     <div className="navbar bg-base-100 fixed z-10 shadow-xl">
       <div className="flex-1">
@@ -21,7 +42,7 @@ const MainNav = ({ username }: MainNavProps) => {
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
-          <li>
+          <li className="mr-1">
             <Link
               href="/shop"
               className={`${pathname === "/shop" && "active"}`}
@@ -29,12 +50,22 @@ const MainNav = ({ username }: MainNavProps) => {
               Shop
             </Link>
           </li>
-          <li>
+          <li className="mr-1">
             <Link
-              href="/nfts"
-              className={`${pathname === "/nfts" && "active"}`}
+              href="/secret-shop"
+              className={`${pathname === "/secret-shop" && "active"} ${
+                !hasAccess && "text-gray-500"
+              }`}
             >
-              NFTs
+              Secret Shop
+            </Link>
+          </li>
+          <li className="mr-1">
+            <Link
+              href="/balance"
+              className={`${pathname === "/balance" && "active"}`}
+            >
+              Balance
             </Link>
           </li>
           <li>

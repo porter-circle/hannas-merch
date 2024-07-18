@@ -6,12 +6,14 @@ import ConfirmPurchaseModal from "./ConfirmPurchaseModal";
 import { useToast } from "../_context/ToastContext";
 import type UserType from "../_types/User";
 import SHOP_ITEMS from "./ShopItemsData";
+import ShopItemType from "../_types/ShopItem";
 
 type ShopItemsProps = {
   handlePurchase: () => Promise<UserType>;
+  items?: ShopItemType[];
 };
 
-const ShopItems = ({ handlePurchase }: ShopItemsProps) => {
+const ShopItems = ({ handlePurchase, items = [] }: ShopItemsProps) => {
   const [confirmationModalOpen, setConfirmationModalOpen] = useState(false);
   const [activeItemName, setActiveItemName] = useState<string | undefined>(
     undefined
@@ -33,7 +35,7 @@ const ShopItems = ({ handlePurchase }: ShopItemsProps) => {
 
   return (
     <>
-      {SHOP_ITEMS.map((item) => (
+      {items.map((item) => (
         <ShopItemCard
           onBuyNow={() => handleClickOnBuy(item.name)}
           item={item}

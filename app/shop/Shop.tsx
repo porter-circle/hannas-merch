@@ -4,7 +4,13 @@ import ShopItems from "./ShopItems";
 
 import type UserType from "../_types/User";
 
-const Shop = async () => {
+import ShopItemType from "../_types/ShopItem";
+
+type ShopProps = {
+  items?: ShopItemType[];
+};
+
+const Shop = async ({ items = [] }: ShopProps) => {
   const session = await getSession();
 
   const handlePurchase = async (): Promise<UserType> => {
@@ -14,7 +20,14 @@ const Shop = async () => {
 
   return (
     <div className="flex gap-12 flex-wrap justify-between">
-      <ShopItems handlePurchase={handlePurchase} />
+      {items.length ? (
+        <ShopItems handlePurchase={handlePurchase} items={items} />
+      ) : (
+        <div className="flex items-center w-full flex-col">
+          <p className="text-xl">Go spend more 💸 ❤️</p>
+          <p className="text-xl">- Hanna</p>
+        </div>
+      )}
     </div>
   );
 };

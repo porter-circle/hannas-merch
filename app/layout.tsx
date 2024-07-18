@@ -4,7 +4,6 @@ import MainNav from "./_components/MainNav";
 import { getSession } from "./_auth/auth";
 import SignIn from "./_auth/SignIn";
 import Providers from "./_context/Providers";
-import Notifications from "./nfts/Notifications";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +16,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getSession();
+
   return (
     <html lang="en" data-theme="dracula">
       <body>
@@ -29,7 +29,6 @@ export default async function RootLayout({
               <main className="min-h-svh p-12 flex justify-center bg-neutral">
                 <div className="max-w-7xl pt-16 w-full">{children}</div>
               </main>
-              <Notifications />
             </>
           )}
         </Providers>
