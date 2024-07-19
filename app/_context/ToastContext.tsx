@@ -38,13 +38,9 @@ export function ToastProvider({ children }: ToastProviderProps) {
   );
 
   useEffect(() => {
-    const newestToast = toastMsgs[toastMsgs.length - 1];
-    const timeout = setTimeout(
-      () => {
-        setToastMsgs((msgs): ToastType[] => msgs.toSpliced(0, 1));
-      },
-      newestToast?.type === "info" ? 10000 : 3000
-    );
+    const timeout = setTimeout(() => {
+      setToastMsgs((msgs): ToastType[] => msgs.toSpliced(0, 1));
+    }, 5000);
 
     return () => {
       if (timeout) {

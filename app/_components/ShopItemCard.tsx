@@ -26,7 +26,9 @@ const ShopItemCard = ({ onBuyNow, item }: ShopItemCardProps) => (
     <div className="card-body justify-end">
       <div className="flex justify-between items-baseline w-full pb-4">
         <h2 className="card-title">{item.name}</h2>
-        <span>{item.price} USDC</span>
+        <span>
+          {item.price} {item.gated ? "HC" : "USDC"}
+        </span>
       </div>
 
       <div className="card-actions justify-center">
