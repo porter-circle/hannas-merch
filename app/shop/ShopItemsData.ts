@@ -38,7 +38,7 @@ const SHOP_ITEMS: ShopItemType[] = [
     id: "5",
     imgUrl:
       "https://harvesttotable.com/wp-content/uploads/2016/08/bigstock-Fresh-Dug-Carrots-5970768-1024x683.jpg",
-    price: 100,
+    price: 10000,
     gated: true,
   },
   {
@@ -46,14 +46,14 @@ const SHOP_ITEMS: ShopItemType[] = [
     id: "6",
     imgUrl:
       "https://napalmrecords.com/media/catalog/product/cache/2c98b5dedb058b51317c19b0b945bfc5/6/7/67004_sentenced_death_metal_orchestra_from_finland_black_2_lp_vinyl_napalm_records.jpg",
-    price: 40,
+    price: 4000,
     gated: true,
   },
   {
     name: "Hello Kitty Slippers",
     id: "7",
     imgUrl: "https://m.media-amazon.com/images/I/81c4OQVhw1L._AC_SX395_.jpg",
-    price: 300,
+    price: 30000,
     gated: true,
   },
 ];

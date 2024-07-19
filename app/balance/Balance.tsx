@@ -17,9 +17,11 @@ const Balance = async () => {
   const data = await getBalance(session.user.user_name);
   const amount = data.response.data.tokenBalances[0].amount;
 
+  const displayAmount = amount === "0" ? "0" : "1";
+
   return (
     <div className="flex items-center justify-center h-full">
-      <BalanceAmount amount={amount} />
+      <BalanceAmount amount={displayAmount} />
     </div>
   );
 };

@@ -5,6 +5,8 @@ type ShopItemCardProps = {
   item: ShopItemType;
 };
 
+const formatNum = (num: number) => new Intl.NumberFormat().format(num);
+
 const ShopItemCard = ({ onBuyNow, item }: ShopItemCardProps) => (
   <div
     className={`card bg-base-200 w-96 shadow-lg ${
@@ -27,7 +29,7 @@ const ShopItemCard = ({ onBuyNow, item }: ShopItemCardProps) => (
       <div className="flex justify-between items-baseline w-full pb-4">
         <h2 className="card-title">{item.name}</h2>
         <span>
-          {item.price} {item.gated ? "HC" : "USDC"}
+          {formatNum(item.price)} {item.gated ? "HC" : "USDC"}
         </span>
       </div>
 
